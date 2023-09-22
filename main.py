@@ -9,18 +9,18 @@
 
 # Access to Spotify API
 
-# Access to spotipy module
+# Access to spotipy module - see notes
 import spotipy  # 1 additional module imported
 from spotipy.oauth2 import SpotifyOAuth
 import random  # 2nd additional module imported
 
 
-# Set up authentication
+# Set up authentication - see notes 
 def setup_spotify():
     sp_oauth = SpotifyOAuth(
-        client_id='CLIENT_ID', #insert client_id & client_secret from Spotify - see notes
+        client_id='CLIENT_ID', 
         client_secret='CLIENT_SECRET',
-        redirect_uri='http://localhost:8888/callback', #requires uri for callback - use localhost as generic
+        redirect_uri='http://localhost:8888/callback', #Spotify requires URL to send user after granting permission for security and data purposes
         scope='user-library-read user-read-playback-state user-modify-playback-state'
     )
     sp = spotipy.Spotify(auth_manager=sp_oauth)
@@ -52,23 +52,23 @@ def recommend_songs(artist_name, sp):
 
 
 def create_playlist(songs):
-    with open("your_playlist.txt", "a") as file:
-        file.write("My Playlist\n")
+    with open("your_playlist.txt", "a") as file: #append recommended songs to 
+        file.write("My Playlist\n") # write title of txt file
         for song in songs:
             formatted_song = song.split(" - ")[0][
                              :50]  # split() using delimiter '-' and slice() with limit of [50]
-            file.write(f"{formatted_song}\n")
+            file.write(f"{formatted_song}\n") 
     print("Tracks list has been saved to 'your_playlist.txt'")
 
 
 if __name__ == "__main__":
-    sp = setup_spotify()
+    sp = setup_spotify() #calling function that calls the API 
     all_recommended_songs = []  # empty list to store all songs for playlist
 # while loop to check spotify setup has been successful 
     while True:
         user_artist = get_user_input()
         if user_artist.lower() == 'exit':
-            break
+            break #break app once user types 'exit' else continue
         playlist_songs = recommend_songs(user_artist, sp)
         all_recommended_songs.extend(playlist_songs)  # adds songs to [list]
         print("\n" + 'Type "exit" to close and create playlist')
