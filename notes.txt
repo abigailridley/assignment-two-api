@@ -1,0 +1,8 @@
+Additional modules installed
+Spotipy needs to be installed if using global environment 
+Spotipy is a Python module that handles the comms with the Spoify API, including end points and user authorisation
+pip install spotipy --upgrade
+
+Spotify API requires an client ID and client secret which I got here by creating an app
+https://developer.spotify.com/documentation/web-api
+

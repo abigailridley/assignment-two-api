@@ -18,8 +18,8 @@ import random  # 2nd additional module imported
 # Set up authentication
 def setup_spotify():
     sp_oauth = SpotifyOAuth(
-        client_id='213ba2fc193249c8be9f423ac813347d',
-        client_secret='53ff341a417740b6b4500e415da2c492',
+        client_id='CLIENT_ID', #insert client_id & client_secret from Spotify - see notes
+        client_secret='CLIENT_SECRET',
         redirect_uri='http://localhost:8888/callback', #requires uri for callback - use localhost as generic
         scope='user-library-read user-read-playback-state user-modify-playback-state'
     )
@@ -56,7 +56,7 @@ def create_playlist(songs):
         file.write("My Playlist\n")
         for song in songs:
             formatted_song = song.split(" - ")[0][
-                             :50]  # split using delimiter '-' and uses the index [0] to show first part and then limit of [50] characters
+                             :50]  # split() using delimiter '-' and slice() with limit of [50]
             file.write(f"{formatted_song}\n")
     print("Tracks list has been saved to 'your_playlist.txt'")
 
